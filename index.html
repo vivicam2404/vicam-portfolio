@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Kỹ Thuật Số</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1a3a1a;
+    --gold:   #4a8c2a;
+    --gold-lt:#ea912b;
+    --cream:  #e6ffb3;
+    --muted:  #4a6340;
+    --border: hsl(35, 100%, 74%);
+    --text:   #1f2e1a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DeArPix 2.01', sans-serif;
+    background: linear-gradient(90deg,rgba(230, 255, 179, 0.5) 0%, rgba(255, 231, 179, 0.5) 50%, rgba(230, 255, 179, 0.5) 100%);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── Sticky header ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(230,255,179,0.92);
+    backdrop-filter: blur(10px);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--navy);
+    text-transform: uppercase;
+  }
+  nav a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 28px;
+    letter-spacing: 0.04em;
+    transition: color .2s;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { color: var(--navy); }
+  nav a.active {
+    color: var(--navy);
+    font-weight: 500;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  /* ── Page sections (one per "trang") ── */
+  .page {
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  .page + .page {
+    border-top: 2px solid var(--border);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: 760px;
+    margin: 72px auto 0;
+    padding: 0 32px;
+  }
+  .eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'SVN-Retron 2000', serif;
+    font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  h1 span {
+    display: block;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .lead {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 0 56px;
+  }
+
+  /* ── Generic section ── */
+  .section {
+    max-width: 760px;
+    margin: 0 auto 56px;
+    padding: 0 32px;
+  }
+  .section h2 {
+    font-family: 'SVN-Retron 2000', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .section p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .section p:last-child { margin-bottom: 0; }
+
+  /* ── Info card (giới thiệu) ── */
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
+    margin-bottom: 48px;
+  }
+  .info-item label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .info-item p {
+    font-size: 19px;
+    color: var(--navy);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── Goal cards ── */
+  .goal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .goal-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .goal-card .icon { font-size: 22px; margin-bottom: 12px; }
+  .goal-card h3 {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .goal-card p { font-size: 17px; color: var(--muted); line-height: 1.7; margin: 0; }
+
+  /* ── Purpose box ── */
+  .purpose-box {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-top: 8px;
+  }
+  .purpose-box p { color: rgba(255,255,255,0.85); font-size: 16px; line-height: 1.85; margin-bottom: 0; }
+  .purpose-box p strong { color: var(--gold-lt); font-weight: 500; }
+  .purpose-box p + p { margin-top: 16px; }
+
+  /* ── Project grid ── */
+  .proj-grid {
+    max-width: 800px;
+    margin: 0 auto 56px;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .25s, transform .2s, border-color .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .card:hover { box-shadow: 0 8px 32px rgba(26,58,26,.10); transform: translateY(-3px); border-color: var(--gold); }
+  .card:hover::before { opacity: 1; }
+
+  .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .badge {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: #d4f5a0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+  .chapter-tag { font-size: 14px; color: var(--muted); letter-spacing: 0.06em; }
+
+  .card h2 {
+    font-family: 'SVN-Retron 2000', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .card .desc { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; flex: 1; }
+
+  .summary { background: var(--cream); border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; }
+  .summary-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .summary p { font-size: 13px; color: var(--text); line-height: 1.65; }
+
+  .btn-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 8px;
+    padding: 10px 18px;
+    transition: background .2s, transform .15s;
+    align-self: flex-start;
+  }
+  .btn-open:hover { background: #2d5a2d; transform: translateY(-1px); }
+
+  .placeholder-note {
+    font-size: 11px;
+    color: #92400E;
+    background: #FEF3C7;
+    border: 1px dashed #D97706;
+    border-radius: 5px;
+    padding: 7px 12px;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ── Experience cards (tổng kết) ── */
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 4px; }
+  .exp-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 20px;
+    transition: box-shadow .2s, transform .2s, border-color .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .exp-card:hover { box-shadow: 0 6px 24px rgba(26,58,26,.09); transform: translateY(-2px); border-color: var(--gold); }
+  .exp-card:hover::before { opacity: 1; }
+  .exp-card .icon { font-size: 24px; margin-bottom: 12px; }
+  .exp-card h3 { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
+  .exp-card p { font-size: 13.5px; color: var(--muted); line-height: 1.7; margin: 0; }
+
+  /* ── Knowledge list ── */
+  .knowledge-list { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+  .knowledge-item {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .knowledge-item .dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-top: 8px; }
+  .knowledge-item p { font-size: 15px; color: var(--text); line-height: 1.75; margin: 0; }
+  .knowledge-item p strong { color: var(--navy); font-weight: 500; }
+
+  /* ── Highlight & challenge ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
+  .box { border-radius: 12px; padding: 28px 26px; }
+  .box.highlight { background: var(--navy); }
+  .box.highlight h3 { font-family: 'SVN-Retron 2000', serif; font-size: 16px; color: var(--gold-lt); margin-bottom: 14px; font-weight: 600; }
+  .box.highlight p { font-size: 14.5px; color: rgba(255,255,255,.82); line-height: 1.8; margin: 0; }
+  .box.highlight p + p { margin-top: 12px; }
+  .box.challenge { background: #fff; border: 1px solid var(--border); }
+  .box.challenge h3 { font-family: 'SVN-Retron 2000', serif; font-size: 16px; color: var(--navy); margin-bottom: 14px; font-weight: 600; }
+  .box.challenge p { font-size: 14.5px; color: var(--muted); line-height: 1.8; margin: 0; }
+  .box.challenge p + p { margin-top: 12px; }
+
+  /* ── Closing quote ── */
+  .closing { max-width: 760px; margin: 0 auto 80px; padding: 0 32px; }
+  .closing-inner { border-left: 3px solid var(--gold); padding: 24px 32px; background: #fff; border-radius: 0 12px 12px 0; }
+  .closing-inner p { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); line-height: 1.7; font-style: italic; margin-bottom: 12px; }
+  .closing-inner .author { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--muted); font-style: normal; }
+
+  /* ── Placeholder ── */
+  em.ph {
+    color: #92400E;
+    background: #FEF3C7;
+    border: 1px dashed #D97706;
+    border-radius: 4px;
+    padding: 0 5px;
+    font-style: italic;
+    font-size: 0.92em;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 2px solid var(--border);
+    padding: 24px 48px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    background: rgba(230,255,179,0.6);
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 14px 20px; }
+    .hero, .section, .closing { padding: 0 20px; }
+    .proj-grid { padding: 0 20px; grid-template-columns: 1fr; gap: 16px; }
+    .info-card { grid-template-columns: 1fr; padding: 24px; }
+    .goal-grid, .two-col, .exp-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 28px; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER (sticky, điều hướng giữa các trang) ═══ -->
+<header>
+  <div class="logo">Portfolio Kỹ Thuật Số</div>
+  <nav>
+    <a href="#gioi-thieu" class="active" onclick="setActive(this)">Giới thiệu</a>
+    <a href="#du-an" onclick="setActive(this)">Dự án</a>
+    <a href="#tong-ket" onclick="setActive(this)">Tổng kết</a>
+  </nav>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════
+     TRANG 1 — GIỚI THIỆU
+═══════════════════════════════════════════════ -->
+<div class="page" id="gioi-thieu">
+
+  <section class="hero">
+    <p class="eyebrow">Portfolio Kỹ Thuật Số · Nhập môn Công nghệ số và AI</p>
+    <h1>
+      Xin chào, tôi là
+      <span><em class="ph">Đinh Võ Vi Cầm ! </em></span>
+    </h1>
+    <p class="lead">
+      Sinh viên ngành Ngôn ngữ và Văn hoá Pháp tại Trường Đại học Ngoại ngữ – Đại học Quốc gia Hà Nội (ULIS).
+      Portfolio này là tổng hợp hành trình học tập của tôi trong môn <em>Nhập môn Công nghệ số và Ứng dụng Trí tuệ Nhân tạo</em>.
+    </p>
+    <div class="divider"></div>
+  </section>
+
+  <section class="section">
+    <h2>Thông tin cá nhân</h2>
+    <div class="info-card">
+      <div class="info-item">
+        <label>Họ và tên</label>
+        <p>Đinh Võ Vi Cầm</p>
+      </div>
+      <div class="info-item">
+        <label>Ngành học</label>
+        <p>Ngôn ngữ và Văn hoá Pháp</p>
+      </div>
+      <div class="info-item">
+        <label>Trường</label>
+        <p>ULIS – Đại học Quốc gia Hà Nội</p>
+      </div>
+      <div class="info-item">
+        <label>Khoá học</label>
+        <p>K59/QH.2025</p>
+      </div>
+      <div class="info-item">
+        <label>Sở thích</label>
+        <p>Vẽ, nghe nhạc, xem phim</p>
+      </div>
+      <div class="info-item">
+        <label>Liên hệ</label>
+        <p>25041351@vnu.edu.com</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Mục tiêu học tập &amp; định hướng phát triển</h2>
+    <p>
+      Là sinh viên ngành Ngôn ngữ và Văn hoá Pháp, tôi nhận thức rõ rằng công nghệ số và trí tuệ nhân tạo
+      đang định hình lại cách thức giao tiếp, dịch thuật và sáng tạo nội dung trong lĩnh vực ngôn ngữ.
+      Môn học này mang đến cho tôi cơ hội tiếp cận những kiến thức nền tảng quan trọng đó.
+    </p>
+    <div class="goal-grid">
+      <div class="goal-card">
+        <div class="icon">📚</div>
+        <h3>Hiểu biết nền tảng</h3>
+        <p>Nắm vững các khái niệm cơ bản về công nghệ số, dữ liệu và trí tuệ nhân tạo trong bối cảnh hiện đại.</p>
+      </div>
+      <div class="goal-card">
+        <div class="icon">🔗</div>
+        <h3>Ứng dụng thực tiễn</h3>
+        <p>Kết nối kiến thức công nghệ với chuyên ngành ngôn ngữ — dịch thuật, tạo nội dung, khai thác thông tin đa ngôn ngữ.</p>
+      </div>
+      <div class="goal-card">
+        <div class="icon">🌐</div>
+        <h3>Phát triển kỹ năng số</h3>
+        <p>Hình thành năng lực làm việc trong môi trường kỹ thuật số, đặc biệt trong lĩnh vực ngôn ngữ và văn hoá.</p>
+      </div>
+      <div class="goal-card">
+        <div class="icon">🤝</div>
+        <h3>Hợp tác và chia sẻ</h3>
+        <p>Xây dựng thói quen giao tiếp, hợp tác và trình bày sản phẩm học thuật một cách chuyên nghiệp.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Mục đích của Portfolio này</h2>
+    <div class="purpose-box">
+      <p>
+        Portfolio này được xây dựng nhằm <strong>tổng hợp và thể hiện toàn bộ quá trình học tập</strong>
+        của tôi trong môn Nhập môn Công nghệ số và Ứng dụng Trí tuệ Nhân tạo.
+        Đây không đơn thuần là một bài nộp học thuật — đây là <strong>tài liệu cá nhân phản ánh sự trưởng thành
+        trong tư duy số</strong> của tôi qua từng chủ đề, từng bài tập trong suốt học kỳ.
+      </p>
+      <p>
+        Bên cạnh đó, tôi mong Portfolio này sẽ trở thành <strong>công cụ giới thiệu năng lực bản thân</strong>
+        trong tương lai — minh chứng rằng một sinh viên ngành Ngôn ngữ hoàn toàn có thể làm chủ công nghệ
+        và ứng dụng nó một cách có chủ đích trong lĩnh vực chuyên môn của mình.
+      </p>
+    </div>
+  </section>
+
+</div><!-- /page gioi-thieu -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TRANG 2 — DỰ ÁN
+═══════════════════════════════════════════════ -->
+<div class="page" id="du-an">
+
+  <section class="hero">
+    <p class="eyebrow">Tổng hợp bài tập · Nhập môn Công nghệ số và AI</p>
+    <h1>Trang Dự Án</h1>
+    <p class="lead">
+      Dưới đây là toàn bộ 6 bài tập đã hoàn thành trong môn học, trải dài từ kiến thức về phần cứng máy tính
+      đến an toàn học thuật trong môi trường kỹ thuật số. Mỗi bài tập đều được trình bày kèm mô tả mục tiêu
+      và tóm tắt quá trình thực hiện.
+    </p>
+    <div class="divider"></div>
+  </section>
+
+  <div class="proj-grid">
+
+    <div class="card">
+      <div class="card-meta"><span class="badge">Bài 1</span><span class="chapter-tag">Bài tập 1</span></div>
+      <h2>Máy tính và các thiết bị ngoại vi</h2>
+      <p class="desc">Rèn luyện kỹ năng tạo, đổi tên, sao chép, di chuyển, xóa tệp tin và thư mục một cách thành thạo trên hệ điều hành macOS.</p>
+      <div class="summary">
+        <p class="summary-label">Tóm tắt</p>
+        <p><em style="color:var(--muted)">Đã thực hiện các bước tạo, quản lý và xử lý tệp tin trên máy tính, bao gồm tạo thư mục, tạo tệp, sao chép, di chuyển, xóa và khôi phục dữ liệu.</em></p>
+      </div>
+      <a class="btn-open" href="https://drive.google.com/file/d/1tHGJG-75URG13AgqFXj1gRzDqILC8d7Z/view?usp=sharing" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Xem 
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-meta"><span class="badge">Bài 2</span><span class="chapter-tag">Bài tập 2</span></div>
+      <h2>Khai thác dữ liệu và thông tin</h2>
+      <p class="desc">Phát triển kỹ năng tìm kiếm và đánh giá thông tin học thuật từ các nguồn đáng tin cậy.</p>
+      <div class="summary">
+        <p class="summary-label">Tóm tắt</p>
+        <p><em style="color:var(--muted)">Đã thực hiện quá trình tìm kiếm, chọn lọc và phân tích thông tin từ nhiều nguồn tài liệu để tổng hợp nội dung cho bài báo cáo.</em></p>
+      </div>
+      <a class="btn-open" href="https://drive.google.com/file/d/1ffC51YS-s7W1wHLH2uS9BQtCKAPnFTny/view?usp=drive_link" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Xem
+      </a>
+
+    </div>
+
+    <div class="card">
+      <div class="card-meta"><span class="badge">Bài 3</span><span class="chapter-tag">Bài tập 2</span></div>
+      <h2>Tổng quan về trí tuệ nhân tạo</h2>
+      <p class="desc">Phát triển kỹ năng viết prompt hiệu quả để tận dụng tối đa khả năng của các mô hình ngôn ngữ lớn trong học tập.
+</p>
+      <div class="summary">
+        <p class="summary-label">Tóm tắt</p>
+        <p><em style="color:var(--muted)">Đã thực hiện quá trình thử nghiệm và điều chỉnh prompt trên công cụ AI để đánh giá, so sánh và cải thiện chất lượng kết quả đầu ra.</em></p>
+      </div>
+      <a class="btn-open" href="https://drive.google.com/file/d/12WnIyo0RRw2g9SHXhwMDk-y9ZgMKua3O/view?usp=drive_link" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Xem 
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-meta"><span class="badge">Bài 4</span><span class="chapter-tag">Bài tập 3</span></div>
+      <h2>Giao tiếp và hợp tác trong môi trường số</h2>
+      <p class="desc">Thành thạo các công cụ hợp tác trực tuyến và thể hiện năng lực quản lý, điều phối cá nhân trong dự án nhóm.</p>
+      <div class="summary">
+        <p class="summary-label">Tóm tắt</p>
+        <p><em style="color:var(--muted)">Đã tham gia thực hiện dự án nhóm bằng cách sử dụng các công cụ trực tuyến để quản lý công việc, trao đổi thông tin, soạn thảo và hoàn thiện sản phẩm chung.</em></p>
+      </div>
+      <a class="btn-open" href="https://drive.google.com/file/d/1he5o1HD_1aY02xq6TPacTxsHHhvEmHQ_/view?usp=drive_link" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Xem 
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-meta"><span class="badge">Bài 5</span><span class="chapter-tag">Bài tập 2</span></div>
+      <h2>Sáng tạo nội dung số</h2>
+      <p class="desc">Thành thạo việc sử dụng các công cụ AI tạo sinh để hỗ trợ quá trình sáng tạo nội dung số.</p>
+      <div class="summary">
+        <p class="summary-label">Tóm tắt</p>
+        <p><em style="color:var(--muted)">Đã thực hiện quá trình lên ý tưởng, sử dụng các công cụ AI để hỗ trợ tạo nội dung, hình ảnh và thiết kế, sau đó chỉnh sửa và hoàn thiện sản phẩm infographic.</em></p>
+      </div>
+      <a class="btn-open" href="https://drive.google.com/file/d/1XHiteCJmrxOuzd-Hikgc5SE2nnZ77SBg/view?usp=drive_link" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Xem 
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-meta"><span class="badge">Bài 6</span><span class="chapter-tag">Bài tập 4</span></div>
+      <h2>An toàn và liêm chính học thuật trong môi trường số</h2>
+      <p class="desc">Phát triển kỹ năng sử dụng AI có trách nhiệm và đạo đức trong học tập và nghiên cứu.</p>
+      <div class="summary">
+        <p class="summary-label">Tóm tắt</p>
+        <p><em style="color:var(--muted)">Đã thực hiện quá trình nghiên cứu, sử dụng AI hỗ trợ tìm kiếm thông tin, phân tích vấn đề và xây dựng nội dung báo cáo theo hướng sử dụng AI có trách nhiệm.</em></p>
+      </div>
+      <a class="btn-open" href="https://drive.google.com/file/d/10dKiqDGTw-bFfehyWp-zC7JUPF5PQukL/view?usp=drive_link" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Xem 
+      </a>
+    </div>
+
+  </div>
+</div><!-- /page du-an -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TRANG 3 — TỔNG KẾT
+═══════════════════════════════════════════════ -->
+<div class="page" id="tong-ket">
+
+  <section class="hero">
+    <p class="eyebrow">Nhìn lại hành trình · Nhập môn Công nghệ số và AI</p>
+    <h1>Tổng Kết</h1>
+    <p class="lead">
+      Sau một học kỳ tiếp cận với thế giới công nghệ số và trí tuệ nhân tạo, đây là những
+      trải nghiệm, kiến thức và bài học tôi mang theo từ môn học này.
+    </p>
+    <div class="divider"></div>
+  </section>
+
+  <section class="section">
+    <h2>Trải nghiệm cá nhân</h2>
+    <p>
+      Là sinh viên ngành Ngôn ngữ và Văn hoá Pháp, tôi bước vào môn học này với không ít
+      băn khoăn — liệu một người học ngoại ngữ có thực sự cần hiểu về công nghệ số?
+      Sau học kỳ này, câu trả lời của tôi là: <strong>không chỉ cần, mà còn rất cần.</strong>
+    </p>
+    <div class="exp-grid" style="margin-top:24px;">
+      <div class="exp-card">
+        <div class="icon">🌱</div>
+        <h3>Khởi đầu bỡ ngỡ</h3>
+        <p>Nhiều khái niệm hoàn toàn mới — từ cấu trúc máy tính đến thuật toán AI — nhưng cách tiếp cận từng bước giúp tôi dần làm quen.</p>
+      </div>
+      <div class="exp-card">
+        <div class="icon">⚡</div>
+        <h3>Bước ngoặt nhận thức</h3>
+        <p>Khi thử dùng AI để giải thích một bài học khó, tôi ngạc nhiên vì nó có thể trình bày kiến thức theo nhiều cách khác nhau, giúp tôi hiểu vấn đề nhanh hơn. Điều đó khiến tôi nhận ra rằng công nghệ không chỉ là công cụ hỗ trợ đơn giản mà còn có thể trở thành người đồng hành trong học tập và công việc.</p>
+      </div>
+      <div class="exp-card">
+        <div class="icon">🎯</div>
+        <h3>Tự tin hơn mỗi tuần</h3>
+        <p>Từng bài tập nhỏ tích lũy thành một bức tranh lớn — tôi dần thấy mình có thể làm chủ được công nghệ, không chỉ sử dụng thụ động.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Kiến thức và kỹ năng quan trọng nhất</h2>
+    <div class="knowledge-list">
+      <div class="knowledge-item">
+        <div class="dot"></div>
+        <p><strong>Hiểu cách thông tin vận hành trong thế giới số</strong> — từ cách máy tính xử lý dữ liệu đến cách AI học từ dữ liệu. Điều này giúp tôi đặt câu hỏi đúng hơn khi sử dụng các công cụ kỹ thuật số.</p>
+      </div>
+      <div class="knowledge-item">
+        <div class="dot"></div>
+        <p><strong>Kỹ năng khai thác và đánh giá thông tin</strong> — biết phân biệt nguồn tin đáng tin cậy, hiểu cách các thuật toán ảnh hưởng đến những gì chúng ta đọc và thấy mỗi ngày.</p>
+      </div>
+      <div class="knowledge-item">
+        <div class="dot"></div>
+        <p><strong>Ý thức về an toàn và liêm chính số</strong> — từ bảo vệ thông tin cá nhân đến trích dẫn nguồn khi dùng AI. Đặc biệt quan trọng với một người làm việc với ngôn ngữ và nội dung.</p>
+      </div>
+    
+  </section>
+
+  <section class="section">
+    <h2>Điểm tâm đắc &amp; thách thức</h2>
+    <div class="two-col">
+      <div class="box highlight">
+        <h3>✦ Điểm tâm đắc nhất</h3>
+        <p>
+          Điều tôi ấn tượng nhất là <em style="color:var(--gold-lt)">mối liên hệ giữa ngôn ngữ và trí tuệ nhân tạo</em> —
+          các mô hình ngôn ngữ lớn như ChatGPT thực chất được xây dựng từ hàng tỷ văn bản,
+          học cách "hiểu" ngôn ngữ theo cách gần giống con người. Điều này khiến tôi nhìn
+          chuyên ngành của mình với một góc nhìn hoàn toàn mới.
+        </p>
+      </div>
+      <div class="box challenge">
+        <h3>⚡ Thách thức đã vượt qua</h3>
+        <p>
+          Thách thức lớn nhất là làm quen với tư duy kỹ thuật — vốn rất khác so với
+          cách tiếp cận phân tích văn bản và ngôn ngữ học mà tôi đã quen.
+          Nhưng chính sự khác biệt đó lại trở thành điểm thú vị nhất của môn học.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="closing">
+    <div class="closing-inner">
+      <p>
+        "Xây dựng Portfolio này không chỉ là hoàn thành một bài tập —
+        đó là lần đầu tiên tôi thật sự nhìn lại toàn bộ hành trình học tập của mình
+        và nhận ra mình đã đi được bao xa."
+      </p>
+    </div>
+  </div>
+
+</div><!-- /page tong-ket -->
+
+
+<footer>
+  Đinh Võ Vi Cầm · Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo · ĐHQGHN · 2026</em>
+</footer>
+
+<script>
+  // Highlight nav link khi click
+  function setActive(el) {
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Tự động highlight nav khi scroll đến trang
+  const pages = ['gioi-thieu', 'du-an', 'tong-ket'];
+  const links = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        links.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  pages.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
